@@ -1,0 +1,66 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  height: 100vh;
+  margin: 0;
+  font-size: 20px;
+  font-family: Oswald, Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 300;
+  color: #fff;
+  /*background: linear-gradient(
+    rgba(0,0,0,0.4),
+    rgba(0,0,0,0.4)),
+    url(http://static.zoommyapp.com/full/70748.jpg);
+  -webkit-background-size: cover;
+  background-size: cover;*/
+}
+
+section {
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 3.5rem;
+}
+
+h1,
+h2 {
+  font-family: Oswald, Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 700;
+}
+
+
+/****************   WEATHER INFO   ****************/
+#info-wrap {
+  margin: 2rem;
+}
+
+#location,
+#weather-type {
+  margin: 0;
+}
+
+#location {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+#temperature {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+#scale {
+  font-size: 2.5rem;
+}
