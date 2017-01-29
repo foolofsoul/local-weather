@@ -1,7 +1,7 @@
 
 
 var loc = document.getElementById("location"),
-    temp = document.getElementById("temperature"),
+    temp = document.getElementById("temp"),
     wType = document.getElementById("weather-type"),
     lat,
     lon;
@@ -34,98 +34,6 @@ var bg = {
   b50d: "http://bossfight.co/wp-content/uploads/2015/06/boss-fight-stock-images-photos-free-seattle-sky-view.jpg",
   b50n: "http://bossfight.co/wp-content/uploads/2015/06/boss-fight-stock-images-photos-free-seattle-sky-view.jpg"
   
-
-  // thunderstorm: [
-  //   "thunderstorm with light rain",
-  //   "thunderstorm with rain",
-  //   "thunderstorm with heavy rain",
-  //   "light thunderstorm",
-  //   "thunderstorm",
-  //   "heavy thunderstorm",
-  //   "ragged thunderstorm",
-  //   "thunderstorm with light drizzle",
-  //   "thunderstorm with drizzle",
-  //   "thunderstorm with heavy drizzle"
-  // ],
-
-  // drizzle: [
-  //   "light intensity drizzle",
-  //   "drizzle",
-  //   "heavy intensity drizzle",
-  //   "light intensity drizzle rain",
-  //   "drizzle rain",
-  //   "heavy intensity drizzle rain",
-  //   "shower rain and drizzle",
-  //   "heavy shower rain and drizzle",
-  //   "shower drizzle"
-  // ],
-
-  // rain: [
-  //   "light rain",
-  //   "moderate rain",
-  //   "heavy intensity rain",
-  //   "very heavy rain",
-  //   "extreme rain",
-  //   "freezing rain",
-  //   "light intensity shower rain",
-  //   "shower rain",
-  //   "shower drizzle",
-  //   "heavy intensity shower rain",
-  //   "ragged shower rain"
-  // ],
-
-  // snow: [
-  //   "light snow",
-  //   "snow",
-  //   "heavy snow",
-  //   "sleet",
-  //   "shower sleet",
-  //   "light rain and snow",
-  //   "rain and snow",
-  //   "light shower snow",
-  //   "shower snow",
-  //   "heavy shower snow"
-  // ],
-
-  // drizzle: [
-  //   "light intensity drizzle",
-  //   "drizzle",
-  //   "heavy intensity drizzle",
-  //   "light intensity drizzle rain",
-  //   "drizzle rain",
-  //   "heavy intensity drizzle rain",
-  //   "shower rain and drizzle",
-  //   "heavy shower rain and drizzle",
-  //   "shower drizzle"
-  // ],
-
-  // atmosphere: [
-  //   "mist",
-  //   "smoke",
-  //   "haze",
-  //   "sand, dust whirls",
-  //   "fog",
-  //   "sand",
-  //   "dust",
-  //   "volcanic ash",
-  //   "squalls",
-  //   "tornado"
-  // ],
-
-  // clear: [
-  //   "clear sky"
-  // ],
-
-  // clouds: [
-  //   "tornado",
-  //   "tropical",
-  //   "hurricane",
-  //   "cold",
-  //   "hot",
-  //   "windy",
-  //   "hail"
-  // ],
-
   // additional: [
   //   "calm",
   //   "light breeze",
@@ -139,7 +47,6 @@ var bg = {
   //   "violent storm",
   //   "hurricane"
   // ]
-
 }
 
 navigator.geolocation.getCurrentPosition(showPos);
@@ -156,14 +63,39 @@ function showPos(position){
 
       loc.innerHTML = json.name + ", " + json.sys.country;
       wType.innerHTML = json.weather[0].main;
-      temp.innerHTML = json.main.temp.toFixed(0) + "<sup id='scale'>&deg;F</sup>";
+      temp.innerHTML = json.main.temp.toFixed(0);
 
       document.body.style.background = "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.0)), url(" + bg[ "b" + img] + ")";
       document.body.style.backgroundSize = "cover";
+
+      var scale = document.getElementById("scale");
+
+      function toF(wTemp) {
+        temp.innerHTML = (wTemp * 1.8 + 32).toFixed(0);
+        scale.innerHTML = "F";
+      }
+
+      function toC(wTemp) {
+        temp.innerHTML = ((wTemp - 32) * 5 / 9).toFixed(0);
+        scale.innerHTML = "C";
+      }
+
+      function changeDeg() {
+        console.log("yes");
+        if(scale.innerHTML == "F"){
+          toC(temp.innerHTML);
+        } else {
+          toF(temp.innerHTML);
+        }
+      }
+
+      scale.addEventListener("click", changeDeg);
     }
   }
 
   xhr.open("GET", "http://api.openweathermap.org/data/2.5/weather?APPID=ea8332c4c5398fa510b78c97746a685d&units=imperial&lat=" + lat + "&lon=" + lon, true);
   xhr.send();
 }
+
+
 

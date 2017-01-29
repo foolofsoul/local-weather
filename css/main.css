@@ -56,11 +56,21 @@ h2 {
   font-weight: 400;
 }
 
-#temperature {
+#temp {
+  display: inline-block;
+  margin: 0;
   font-size: 3.5rem;
   line-height: 1;
 }
 
-#scale {
-  font-size: 2.5rem;
+#scale,
+.deg {
+  font-size: 2rem;
+  position: relative;
+  top: -15px;
+}
+
+#scale:hover {
+  color: #ddd;
+  cursor: pointer;
 }
